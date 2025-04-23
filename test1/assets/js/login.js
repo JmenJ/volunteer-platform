@@ -18,5 +18,5 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
   alert(`Вход как ${role === 'volunteer' ? 'Волонтёр' : 'Партнёр'} выполнен`);
 
   // Перенаправление
-  window.location.href = "main.html";
-});
+  window.location.replace("main.html");
+}); 

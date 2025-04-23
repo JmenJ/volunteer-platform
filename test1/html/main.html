@@ -1,11 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
+    <link rel="stylesheet" href="/assets/css/style_main.css">
+    <title>Центр волонтёрства</title>
 </head>
 <body>
-    
+    <header>
+        <div class="logo">Центр волонтёрства</div>
+        <div class="user-menu">
+            <button class="user-btn">
+                Личный кабинет
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Личный кабинет</a>
+                <a href="Bonus Receipt History.html">История баллов</a>
+                <a href="#">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1>Добро пожаловать в Центр волонтёрства!</h1>
+    </main>
+
+    <script>
+        // Здесь можно добавить JavaScript для функционала
+        document.querySelector('.user-btn').addEventListener('click', function() {
+            const dropdown = document.querySelector('.dropdown-content');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Закрытие dropdown при клике вне его
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.user-btn') && !e.target.matches('.user-btn *')) {
+                const dropdowns = document.querySelectorAll('.dropdown-content');
+                dropdowns.forEach(dropdown => {
+                    if (dropdown.style.display === 'block') {
+                        dropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
