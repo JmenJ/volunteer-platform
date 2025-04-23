@@ -5,7 +5,7 @@ function ObrabZapr(request, response){ //info / otvet
     if (request.method == "GET"){
         console.log(request.url);
         if (request.url == "/"){
-            const file = "./test1/html/main.html;
+            const file = "./test1/html/main.html";
         }
         else{
             const file = "./test1"+request.url;
