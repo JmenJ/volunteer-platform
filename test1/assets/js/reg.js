@@ -2,6 +2,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const regRole = document.getElementById('regRole');
     const volunteerFields = document.getElementById('volunteerFields');
     const partnerFields = document.getElementById('partnerFields');
+    function toggleFields(role) {
+        if (role === 'volunteer') {
+          volunteerFields.style.display = 'block';
+          partnerFields.style.display = 'none';
+      
+          document.getElementById('volunteerInn').required = true;
+          document.getElementById('volunteerPassword').required = true;
+      
+          document.getElementById('partnerLogin').required = false;
+          document.getElementById('partnerEmail').required = false;
+          document.getElementById('partnerPassword').required = false;
+      
+        } else if (role === 'partner') {
+          partnerFields.style.display = 'block';
+          volunteerFields.style.display = 'none';
+      
+          document.getElementById('partnerLogin').required = true;
+          document.getElementById('partnerEmail').required = true;
+          document.getElementById('partnerPassword').required = true;
+      
+          document.getElementById('volunteerInn').required = false;
+          document.getElementById('volunteerPassword').required = false;
+      
+        } else {
+          partnerFields.style.display = 'none';
+          volunteerFields.style.display = 'none';
+      
+          document.getElementById('volunteerInn').required = false;
+          document.getElementById('volunteerPassword').required = false;
+          document.getElementById('partnerLogin').required = false;
+          document.getElementById('partnerEmail').required = false;
+          document.getElementById('partnerPassword').required = false;
+        }
+      }
+      
     const registerForm = document.getElementById('registerForm');
   
     const modal = document.getElementById('codeModal');
@@ -24,10 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   
     regRole.addEventListener('change', () => {
-      volunteerFields.style.display = regRole.value === 'volunteer' ? 'block' : 'none';
-      partnerFields.style.display = regRole.value === 'partner' ? 'block' : 'none';
-    });
-  
+        toggleFields(regRole.value);
+      });
+      
     registerForm.addEventListener('submit', function (e) {
       e.preventDefault();
       const role = regRole.value;
