@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="/assets/css/style_bonus.css">
+  <title>История Бонусов</title>
+</head>
+<body>
+
+  <header>
+    История Получения Бонусов
+  </header>
+
+  <div class="container" id="bonus-container">
+    <div>Загрузка истории...</div>
+  </div>
+
+  <!-- Зафиксированная кнопка -->
+  <a href="main.html" class="back-button">Вернуться на главную</a>
+
+  <script>
+    async function fetchBonusHistory() {
+      const data = [
+        {
+          datetime: "23 апреля 2025, 14:35",
+          description: "Вам зачислено за задание «Оставить отзыв»",
+          amount: "+50 бонусов"
+        },
+        {
+          datetime: "21 апреля 2025, 09:12",
+          description: "Вам зачислено за приглашение друга: Иван",
+          amount: "+100 бонусов"
+        },
+        {
+          datetime: "18 апреля 2025, 08:00",
+          description: "Вам зачислено за ежедневный вход в систему",
+          amount: "+10 бонусов"
+        }
+      ];
+
+      const container = document.getElementById("bonus-container");
+      container.innerHTML = "";
+
+      data.forEach(entry => {
+        const div = document.createElement("div");
+        div.className = "bonus-entry";
+        div.innerHTML = `
+          <div class="bonus-date">${entry.datetime}</div>
+          <div class="bonus-description">${entry.description}</div>
+          <div class="bonus-amount">${entry.amount}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    fetchBonusHistory();
+    setInterval(fetchBonusHistory, 10000);
+  </script>
+
+</body>
+</html>

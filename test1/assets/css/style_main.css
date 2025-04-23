@@ -1,3 +1,26 @@
+/* Общий стиль полосы прокрутки */
+::-webkit-scrollbar {
+    width: 5px; /* Ширина вертикального скроллбара */
+    height: 5px; /* Высота горизонтального скроллбара */
+}
+
+/* Полоса фона скроллбара */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Цвет фона */
+    border-radius: 5px;
+}
+
+/* Сам бегунок (ползунок) */
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.397); /* Цвет ползунка */
+    border-radius: 10px;
+}
+
+/* При наведении мыши */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 body {
     background-color: #e8f0ff;
     font-family: Arial, sans-serif;
@@ -5,7 +28,6 @@ body {
     padding: 0;
 }
 
-/* Стили для хедера */
 header {
     background: linear-gradient(to right, #16a085, #3A7BD5);
     color: white;
@@ -20,7 +42,6 @@ header {
     top: 0;
     left: 0;
     z-index: 100;
-    
     transition: background 0.3s ease;
 }
 
@@ -31,8 +52,8 @@ header {
 
 .user-menu {
     position: relative;
+    right:2%;
     display: inline-block;
-    right: 45px;
 }
 
 .user-btn {
@@ -49,15 +70,14 @@ header {
 .dropdown-content {
     display: none;
     position: absolute;
-    right: -15px;
-    top: 100%;
+    right: 0px;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 8px;
     overflow: hidden;
-    
+    margin-top: 0px;
 }
 
 .dropdown-content a {
@@ -76,24 +96,62 @@ header {
     display: block;
 }
 
-/* Основное содержимое */
 main {
     margin-top: 60px;
     padding: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Кнопки в стиле вашего CSS */
-.button {
-    background-color: #3A7BD5;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
+.container {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    width: 70%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 80vh; 
+    overflow-y: auto; 
 }
 
-.button:hover {
-    background-color: #2e62b3;
+.company {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease;
+}
+
+.company:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.company-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.company-description {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: rgba(58, 123, 213, 0.1);
+    color: #3A7BD5;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    opacity: 0.8;
 }

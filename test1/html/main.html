@@ -15,24 +15,66 @@
             </button>
             <div class="dropdown-content">
                 <a href="#">Личный кабинет</a>
-                <a href="Bonus Receipt History.html">История баллов</a>
+                <a href="Bonus_Receipt_History.html">История баллов</a>
                 <a href="#">Выйти</a>
             </div>
         </div>
     </header>
 
     <main>
-        <h1>Добро пожаловать в Центр волонтёрства!</h1>
+        <div class="container">
+            <div class="company">
+                <div class="company-name">Фонд "Доброе сердце"</div>
+                <div class="company-description">Помогаем детям с тяжелыми заболеваниями получить необходимое лечение.</div>
+                <div class="tags">
+                    <span class="tag">Благотворительность</span>
+                    <span class="tag">Финансовая поддержка</span>
+                </div>
+            </div>
+
+            <div class="company">
+                <div class="company-name">Эко-движение "Чистый город"</div>
+                <div class="company-description">Организуем субботники и экологические акции по всему городу.</div>
+                <div class="tags">
+                    <span class="tag">Экологические инициативы</span>
+                    <span class="tag">Организация мероприятий</span>
+                </div>
+            </div>
+
+            <div class="company">
+                <div class="company-name">Проект "Рядом"</div>
+                <div class="company-description">Помощь пожилым людям в быту и сопровождение на прогулках.</div>
+                <div class="tags">
+                    <span class="tag">Помощь пожилым</span>
+                </div>
+            </div>
+
+            <div class="company">
+                <div class="company-name">Центр "Радуга"</div>
+                <div class="company-description">Развивающие занятия и психологическая поддержка для детей из неблагополучных семей.</div>
+                <div class="tags">
+                    <span class="tag">Работа с детьми</span>
+                    <span class="tag">Волонтерство общего профиля</span>
+                </div>
+            </div>
+
+            <div class="company">
+                <div class="company-name">Фонд "Событие"</div>
+                <div class="company-description">Организация благотворительных концертов и фестивалей.</div>
+                <div class="tags">
+                    <span class="tag">Организация мероприятий</span>
+                    <span class="tag">Благотворительность</span>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
-        // Здесь можно добавить JavaScript для функционала
         document.querySelector('.user-btn').addEventListener('click', function() {
             const dropdown = document.querySelector('.dropdown-content');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         });
 
-        // Закрытие dropdown при клике вне его
         window.addEventListener('click', function(e) {
             if (!e.target.matches('.user-btn') && !e.target.matches('.user-btn *')) {
                 const dropdowns = document.querySelectorAll('.dropdown-content');
