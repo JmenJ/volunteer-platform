@@ -1,26 +1,3 @@
-/* Общий стиль полосы прокрутки */
-::-webkit-scrollbar {
-    width: 5px; /* Ширина вертикального скроллбара */
-    height: 5px; /* Высота горизонтального скроллбара */
-}
-
-/* Полоса фона скроллбара */
-::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Цвет фона */
-    border-radius: 5px;
-}
-
-/* Сам бегунок (ползунок) */
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.397); /* Цвет ползунка */
-    border-radius: 10px;
-}
-
-/* При наведении мыши */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
 body {
     background-color: #e8f0ff;
     font-family: Arial, sans-serif;
@@ -52,8 +29,8 @@ header {
 
 .user-menu {
     position: relative;
-    right:2%;
     display: inline-block;
+    right: 2%;
 }
 
 .user-btn {
@@ -70,14 +47,13 @@ header {
 .dropdown-content {
     display: none;
     position: absolute;
-    right: 0px;
+    right: 2px;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 8px;
     overflow: hidden;
-    margin-top: 0px;
 }
 
 .dropdown-content a {
@@ -99,29 +75,96 @@ header {
 main {
     margin-top: 60px;
     padding: 20px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    gap: 20px;
+    min-height: calc(100vh - 100px); /* Добавлено для растяжения на всю высоту */
+    align-items: flex-start; /* Важно - выравнивание по верху */
+}
+
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    height: 100%;
 }
 
 .container {
     background: #fff;
     border-radius: 16px;
-    padding: 25px;
+    padding: 20px;
     width: 70%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 80vh; 
-    overflow-y: auto; 
+    max-height: 70vh;
+    overflow-y: auto;
+    flex-grow: 1;
+    align-self: stretch; /* Растягиваем по высоте */
+}
+
+.filter-sidebar {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    width: 25%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 80px;
+    height: fit-content; /* Высота по содержимому */
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+/* Остальные стили остаются без изменений */
+.filter-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.filter-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter-tag {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.filter-tag:hover {
+    background-color: rgba(58, 123, 213, 0.1);
+}
+
+.filter-tag input {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.filter-tag label {
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.companies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .company {
     padding: 20px;
-    margin-bottom: 20px;
     border: 1px solid #e0e0e0;
     border-radius: 12px;
     transition: box-shadow 0.3s ease;
+    flex-shrink: 0;
 }
 
 .company:hover {
@@ -154,4 +197,77 @@ main {
     border-radius: 20px;
     font-size: 12px;
     opacity: 0.8;
+}
+
+.container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.filter-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.filter-sidebar::-webkit-scrollbar-thumb {
+    background: #d1d1d1;
+}
+
+.update-time {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 12px;
+    color: #7f8c8d;
+    text-align: center;
+}
+
+#lastUpdate {
+    font-weight: bold;
+    color: #3A7BD5;
+}
+
+.company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.details-btn {
+    background-color: #3A7BD5;
+    color: white;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.details-btn:hover {
+    background-color: #2f65b1;
+}
+
+.update-info {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 16px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #444;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
