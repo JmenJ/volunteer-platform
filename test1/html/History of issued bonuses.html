@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>История бонусов — Партнёры</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #16a085;
+      color: #ffffff;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      padding: 2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #cccccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background-color: #a5d6a7;
+    }
+    .filters, .export {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+    }
+    input, select, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #16a085;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1b5e20;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #16a085;
+      color: #ffffff;
+      padding: 0.75rem 1.25rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .back-to-top:hover {
+      background-color: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>История выданных бонусов</h1>
+  </header>
+  <main>
+    <section class="filters">
+      <div>
+        <label for="from-date">С даты:</label>
+        <input type="date" id="from-date" name="from-date">
+      </div>
+      <div>
+        <label for="to-date">По дату:</label>
+        <input type="date" id="to-date" name="to-date">
+      </div>
+      <div>
+        <label for="bonus-type">Тип бонуса:</label>
+        <select id="bonus-type">
+          <option value="">Все</option>
+          <option value="discount">Скидка</option>
+          <option value="points">Баллы</option>
+        </select>
+      </div>
+      <div>
+        <label for="status">Статус:</label>
+        <select id="status">
+          <option value="">Все</option>
+          <option value="used">Использован</option>
+          <option value="active">Активен</option>
+          <option value="expired">Просрочен</option>
+        </select>
+      </div>
+      <div>
+        <label for="search-client">Клиент:</label>
+        <input type="text" id="search-client" placeholder="ФИО, email, ID">
+      </div>
+      <div>
+        <button>Поиск</button>
+      </div>
+    </section>
+
+    <section class="export">
+      <button>Экспорт в Excel</button>
+      <button>Экспорт в PDF</button>
+    </section>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Дата выдачи</th>
+          <th>Клиент</th>
+          <th>Тип бонуса</th>
+          <th>Сумма / %</th>
+          <th>Статус</th>
+          <th>Дата использования</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>12.04.2025</td>
+          <td>Иванов И.И.</td>
+          <td>Скидка 10%</td>
+          <td>—</td>
+          <td>Использован</td>
+          <td>15.04.2025</td>
+        </tr>
+        <tr>
+          <td>14.04.2025</td>
+          <td>Петрова А.А.</td>
+          <td>100 бонусов</td>
+          <td>100</td>
+          <td>Активен</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <button class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+    Вернуться на главный экран
+  </button>
+</body>
+</html>
