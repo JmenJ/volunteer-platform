@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="/assets/css/style_login.css" />
+</head>
+<body>
+  <div class="container">
+    <h1><span style="color:#16a085;">Регистрация</span></h1>
+    <form id="registerForm">
+      <select id="regRole" required>
+        <option value="">Выберите роль</option>
+        <option value="volunteer">Волонтёр</option>
+        <option value="partner">Предприятие-партнёр</option>
+      </select>
+
+      <div id="volunteerFields" style="display:none;">
+        <input type="text" id="volunteerInn" placeholder="ИНН" required />
+        <input type="password" id="volunteerPassword" placeholder="Придумайте пароль" required />
+      </div>
+
+      <div id="partnerFields" style="display:none;">
+        <input type="text" id="partnerLogin" placeholder="Логин" required />
+        <input type="email" id="partnerEmail" placeholder="Электронная почта" required />
+        <input type="password" id="partnerPassword" placeholder="Пароль" required />
+      </div>
+
+      <button class="button" type="submit">Зарегистрироваться</button>
+    </form>
+    <a class="link" href="login.html">Назад ко входу</a>
+  </div>
+
+  <!-- Модальное окно -->
+  <div class="modal" id="codeModal" style="display:none;">
+    <div class="modal-content">
+      <p id="codeModalMessage">Код отправлен на почту</p>
+      <input type="text" id="codeInput" placeholder="Введите код" />
+      <p id="timerText">Повторная отправка через <span id="timer">60</span> сек.</p>
+      <button id="resendBtn" style="display: none;">Отправить повторно</button>
+      <button id="confirmCodeBtn">Подтвердить</button>
+    </div>
+  </div>
+
+  <script src="/assets/js/reg.js"></script>
+</body>
+</html>
