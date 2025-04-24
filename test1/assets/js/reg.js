@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const volunteerFields = document.getElementById('volunteerFields');
     const partnerFields = document.getElementById('partnerFields');
     function toggleFields(role) {
-        if (role === 'volunteer') {
+        if (role === "Volunteers") {
           volunteerFields.style.display = 'block';
           partnerFields.style.display = 'none';
       
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('partnerEmail').required = false;
           document.getElementById('partnerPassword').required = false;
       
-        } else if (role === 'partner') {
+        } else if (role === "Partner") {
           partnerFields.style.display = 'block';
           volunteerFields.style.display = 'none';
       
@@ -66,31 +66,64 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const role = regRole.value;
   
-      if (role === 'volunteer') {
+      if (role === "Volunteers") {
         const inn = document.getElementById('volunteerInn').value;
         const password = document.getElementById('volunteerPassword').value;
         const email = volunteerDB[inn];
   
-        if (!email) {
-          alert('ИНН не найден в базе');
-          return;
-        }
-  
-        confirmationCode = Math.floor(100000 + Math.random() * 900000).toString();
-        pendingUser = { role, inn, password, email };
-        openModal(email);
+        //if (!email) {
+        //  alert('ИНН не найден в базе');
+        //  return;
+        //}
+        //
+        //confirmationCode = Math.floor(100000 + Math.random() * 900000).toString();
+        //pendingUser = { role, inn, password, email };
+        //openModal(email);
+        
+        fetch('http://127.0.0.1:30000/reg.html_data', { headers: { 'Content-Type': 'text/plain', 'MyType': role, 'MyINN':inn, 'MyPassword':password} }) 
+        .then(response => {
+          if (response.headers.get("MyState") === "False"){
+            alert("Не верно введено значение!")
+            return;
+          };
+        })
+        
+        fetch('http://127.0.0.1:30000/reg.html_code', { headers: { 'Content-Type': 'text/plain', 'MyType': role, 'MyCode':"toor"} }) 
+        .then(response => {
+          if (response.headers.get("MyState") === "False"){
+            alert("Не верно введён код!")
+            return;
+          };
+        })
+        window.location.replace("/main_vol.html")
       }
-  
-      else if (role === 'partner') {
+      else if (role === "Partner") {
         const login = document.getElementById('partnerLogin').value;
         const password = document.getElementById('partnerPassword').value;
         const email = document.getElementById('partnerEmail').value;
   
-        confirmationCode = Math.floor(100000 + Math.random() * 900000).toString();
-        pendingUser = { role, login, password, email };
-        openModal(email);
+        //confirmationCode = Math.floor(100000 + Math.random() * 900000).toString();
+        //pendingUser = { role, login, password, email };
+        //openModal(email);
+        
+        fetch('http://127.0.0.1:30000/login.html_data', { headers: { 'Content-Type': 'text/plain', 'MyType': role, 'MyLogin':login, 'MyPassword':password, "MyEmail":email} }) 
+        .then(response => {
+          if (response.headers.get("MyState") === "False"){
+            alert("Не верно ввидено значение!")
+            return;
+          };
+        })
+        
+        fetch('http://127.0.0.1:30000/login.html_code', { headers: { 'Content-Type': 'text/plain', 'MyType': role, 'MyCode':"toor"} }) 
+        .then(response => {
+          alert(response.headers.get("MyState"));
+          if (response.headers.get("MyState") === "False"){
+            alert("Не верно введён код!");
+            return;
+          };
+        })
+        window.location.replace("/main_par.html")
       }
-  
       else {
         alert('Пожалуйста, выберите роль');
       }
@@ -98,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     confirmBtn.addEventListener('click', () => {
       if (codeInput.value === confirmationCode && pendingUser) {
-        if (pendingUser.role === 'volunteer') {
+        if (pendingUser.role === "Volunteers") {
           console.log(`Волонтёр зарегистрирован:\nИНН: ${pendingUser.inn}\nПочта: ${pendingUser.email}`);
           alert('Волонтёр успешно зарегистрирован!');
         } else {

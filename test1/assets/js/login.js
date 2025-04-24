@@ -1,95 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const userRole = document.getElementById('userRole');
-
-  const volunteerLogin = document.getElementById('volunteerLogin');
-  const volunteerPassword = document.getElementById('volunteerPassword');
-
-  const partnerLogin = document.getElementById('partnerLogin');
-  const partnerPassword = document.getElementById('partnerPassword');
-
-  function toggleLoginFields(role) {
-    if (role === 'volunteer') {
-      volunteerLogin.style.display = 'block';
-      volunteerPassword.style.display = 'block';
-      volunteerLogin.required = true;
-      volunteerPassword.required = true;
-
-      partnerLogin.style.display = 'none';
-      partnerPassword.style.display = 'none';
-      partnerLogin.required = false;
-      partnerPassword.required = false;
-    } else if (role === 'partner') {
-      partnerLogin.style.display = 'block';
-      partnerPassword.style.display = 'block';
-      partnerLogin.required = true;
-      partnerPassword.required = true;
-
-      volunteerLogin.style.display = 'none';
-      volunteerPassword.style.display = 'none';
-      volunteerLogin.required = false;
-      volunteerPassword.required = false;
-    } else {
-      // Ничего не выбрано — скрываем всё
-      volunteerLogin.style.display = 'none';
-      volunteerPassword.style.display = 'none';
-      partnerLogin.style.display = 'none';
-      partnerPassword.style.display = 'none';
-
-      volunteerLogin.required = false;
-      volunteerPassword.required = false;
-      partnerLogin.required = false;
-      partnerPassword.required = false;
-    }
-  }
-
-  userRole.addEventListener('change', () => {
-    toggleLoginFields(userRole.value);
-  });
-
-  // Обработка при загрузке страницы
-  toggleLoginFields(userRole.value);
-});
-
-
 document.getElementById('loginForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
   const role = document.getElementById('userRole').value;
+  const login = document.getElementById('login').value;
+  const password = document.getElementById('password').value;
 
   if (!role) {
     alert('Пожалуйста, выберите роль');
     return;
   }
+  
+  fetch('http://127.0.0.1:30000/login.html_prov', { headers: { 'Content-Type': 'text/plain', 'MyType': role, 'MyLogin':login, 'MyPassword':password} }) 
+  .then(response => {
+    if (response.headers.get("MyState")==="False"){
+      alert("Не верно ввидено значение!");
+      return;
+    };
+  })
 
-  let login = '';
-  let password = '';
-
-  if (role === 'volunteer') {
-    login = document.getElementById('volunteerLogin').value.trim();
-    password = document.getElementById('volunteerPassword').value;
-  } else if (role === 'partner') {
-    login = document.getElementById('partnerLogin').value.trim();
-    password = document.getElementById('partnerPassword').value;
-  }
-
-  // Проверка на заполненность
-  if (!login || !password) {
-    alert('Пожалуйста, заполните все поля');
-    return;
-  }
-
-  // Вывод в консоль (не показываем пароль явно)
+  
   console.log(`Попытка входа:
-Роль: ${role === 'volunteer' ? 'Волонтёр' : 'Партнёр'}
+Роль: ${role === 'Volunteers' ? 'Волонтёр' : 'Партнёр'}
 Логин: ${login}
 Пароль: ${'*'.repeat(password.length)}`);
 
-  // Уведомление и перенаправление
-  alert(`Вход как ${role === 'volunteer' ? 'Волонтёр' : 'Партнёр'} выполнен`);
+  alert(`Вход как ${role === 'Volunteers' ? 'Волонтёр' : 'Партнёр'} выполнен`);
 
-  if (role === 'volunteer') {
-    window.location.replace("main_vol.html");
+  // Перенаправление в зависимости от роли
+  if (role === 'Volunteers') {
+    window.location.replace("/main_vol.html");
   } else {
-    window.location.replace("main_par.html");
+    window.location.replace("/main_par.html");
   }
 });
