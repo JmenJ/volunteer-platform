@@ -14,5 +14,6 @@
 Пример команд для линукс:
 
 cd /dir/volunteer-platform
+
 python3 main.py
 
