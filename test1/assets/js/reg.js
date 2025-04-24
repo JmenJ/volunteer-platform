@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           console.log(`Партнёр зарегистрирован:\nЛогин: ${pendingUser.login}\nПочта: ${pendingUser.email}`);
           alert('Партнёр успешно зарегистрирован!');
-          window.location.replace("par/reg_par.html");
+          window.location.replace("reg_par.html");
         }
   
         modal.style.display = 'none';

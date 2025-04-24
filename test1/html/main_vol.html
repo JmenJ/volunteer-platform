@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/style_main.css">
+    <title>Центр волонтёрства</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Центр волонтёрства</div>
+        <div class="user-menu">
+            <button class="user-btn">
+                Личный кабинет
+            </button>
+            <div class="dropdown-content">
+                <a href="profile_vol.html">Личный кабинет</a>
+                <a href="profile_vol_history.html">История баллов</a>
+                <a href="/html/login.html">Выйти</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <div class="filter-sidebar">
+                <div class="filter-title">Фильтр по тегам</div>
+                <div class="filter-tags">
+                    <div class="filter-tag">
+                        <input type="checkbox" id="tag-charity" value="Благотворительность">
+                        <label for="tag-charity">Благотворительность</label>
+                    </div>
+                    <div class="filter-tag">
+                        <input type="checkbox" id="tag-eco" value="Экологические инициативы">
+                        <label for="tag-eco">Экологические инициативы</label>
+                    </div>
+                    <div class="filter-tag">
+                        <input type="checkbox" id="tag-elderly" value="Помощь пожилым">
+                        <label for="tag-elderly">Помощь пожилым</label>
+                    </div>
+                    <div class="filter-tag">
+                        <input type="checkbox" id="tag-kids" value="Работа с детьми">
+                        <label for="tag-kids">Работа с детьми</label>
+                    </div>
+                    <div class="filter-tag">
+                        <input type="checkbox" id="tag-events" value="Организация мероприятий">
+                        <label for="tag-events">Организация мероприятий</label>
+                    </div>
+                    <div class="filter-tag">
+                        <input type="checkbox" id="tag-funding" value="Финансовая поддержка">
+                        <label for="tag-funding">Финансовая поддержка</label>
+                    </div>
+                    <div class="filter-tag">
+                        <input type="checkbox" id="tag-general" value="Волонтерство общего профиля">
+                        <label for="tag-general">Волонтерство общего профиля</label>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="container">
+                <div class="companies-list" id="companiesList">
+                    <div class="company" data-tags="Благотворительность,Финансовая поддержка">
+                        <div class="company-name">Фонд "Доброе сердце"</div>
+                        <div class="company-description">Помогаем детям с тяжелыми заболеваниями получить необходимое лечение.</div>
+                        <div class="tags">
+                            <span class="tag">Благотворительность</span>
+                            <span class="tag">Финансовая поддержка</span>
+                        </div>
+                    </div>
+
+                    <div class="company" data-tags="Экологические инициативы,Организация мероприятий">
+                        <div class="company-name">Эко-движение "Чистый город"</div>
+                        <div class="company-description">Организуем субботники и экологические акции по всему городу.</div>
+                        <div class="tags">
+                            <span class="tag">Экологические инициативы</span>
+                            <span class="tag">Организация мероприятий</span>
+                        </div>
+                    </div>
+
+                    <div class="company" data-tags="Помощь пожилым">
+                        <div class="company-name">Проект "Рядом"</div>
+                        <div class="company-description">Помощь пожилым людям в быту и сопровождение на прогулках.</div>
+                        <div class="tags">
+                            <span class="tag">Помощь пожилым</span>
+                        </div>
+                    </div>
+
+                    <div class="company" data-tags="Работа с детьми,Волонтерство общего профиля">
+                        <div class="company-name">Центр "Радуга"</div>
+                        <div class="company-description">Развивающие занятия и психологическая поддержка для детей из неблагополучных семей.</div>
+                        <div class="tags">
+                            <span class="tag">Работа с детьми</span>
+                            <span class="tag">Волонтерство общего профиля</span>
+                        </div>
+                    </div>
+
+                    <div class="company" data-tags="Организация мероприятий,Благотворительность">
+                        <div class="company-name">Фонд "Событие"</div>
+                        <div class="company-description">Организация благотворительных концертов и фестивалей.</div>
+                        <div class="tags">
+                            <span class="tag">Организация мероприятий</span>
+                            <span class="tag">Благотворительность</span>
+                        </div>
+                    </div>
+
+                    <div class="company" data-tags="Благотворительность,Волонтерство общего профиля">
+                        <div class="company-name">Проект "Добрые руки"</div>
+                        <div class="company-description">Помощь бездомным животным: лечение, стерилизация, поиск дома.</div>
+                        <div class="tags">
+                            <span class="tag">Благотворительность</span>
+                            <span class="tag">Волонтерство общего профиля</span>
+                        </div>
+                    </div>
+
+                    <div class="company" data-tags="Работа с детьми,Организация мероприятий">
+                        <div class="company-name">Фонд "Здоровое поколение"</div>
+                        <div class="company-description">Программы по здоровому образу жизни для подростков.</div>
+                        <div class="tags">
+                            <span class="tag">Работа с детьми</span>
+                            <span class="tag">Организация мероприятий</span>
+                        </div>
+                    </div>
+
+                    <div class="company" data-tags="Экологические инициативы,Организация мероприятий">
+                        <div class="company-name">Инициатива "Городские сады"</div>
+                        <div class="company-description">Создание и уход за общественными садами и огородами.</div>
+                        <div class="tags">
+                            <span class="tag">Экологические инициативы</span>
+                            <span class="tag">Организация мероприятий</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

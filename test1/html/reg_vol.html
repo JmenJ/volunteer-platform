@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Регистрация волонтёра</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tags {
+      margin-bottom: 20px;
+    }
+
+    .tags label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    button {
+      width: 100%;
+      background-color: #16a085;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #12876f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Добро пожаловать, волонтёр!</h2>
+    <form id="volunteerForm">
+      <div class="tags">
+        <strong>Выберите теги:</strong>
+        <label><input type="checkbox" value="Благотворительность"> Благотворительность</label>
+        <label><input type="checkbox" value="Экологические инициативы"> Экологические инициативы</label>
+        <label><input type="checkbox" value="Помощь пожилым"> Помощь пожилым</label>
+        <label><input type="checkbox" value="Работа с детьми"> Работа с детьми</label>
+        <label><input type="checkbox" value="Организация мероприятий"> Организация мероприятий</label>
+        <label><input type="checkbox" value="Финансовая поддержка (сбор средств)"> Финансовая поддержка (сбор средств)</label>
+        <label><input type="checkbox" value="Волонтерство общего профиля"> Волонтерство общего профиля</label>
+      </div>
+
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('volunteerForm');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const selectedTags = [];
+      document.querySelectorAll('.tags input[type="checkbox"]:checked').forEach(tag => {
+        selectedTags.push(tag.value);
+      });
+      const volunteer = {
+        tags: selectedTags
+      };
+
+      console.log("Данные волонтёра:", volunteer);
+
+      alert("Спасибо за регистрацию, волонтёр!");
+      window.location.replace("main_vol.html");
+      form.reset();
+    });
+  </script>
+</body>
+</html> 

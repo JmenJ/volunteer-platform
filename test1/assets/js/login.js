@@ -19,8 +19,8 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
 
   // Перенаправление в зависимости от роли
   if (role === 'volunteer') {
-    window.location.replace("vol/main_vol.html");
+    window.location.replace("main_vol.html");
   } else {
-    window.location.replace("par/main_par.html");
+    window.location.replace("main_par.html");
   }
 });
