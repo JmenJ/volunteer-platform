@@ -379,4 +379,45 @@
     white-space: nowrap;
   }
   
+  .filter-tag label {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+  }
+
+  .filter-box {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f5faff;
+    border-radius: 12px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #dceeff;
+  }
+  
+  .filter-box h4 {
+    font-size: 16px;
+    color: #2f6fd0;
+    margin-bottom: 15px;
+  }
+  
+  .filter-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.3;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .filter-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+
+  
+  
   
