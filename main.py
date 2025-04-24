@@ -39,7 +39,7 @@ def send_code_to(ml):
     mail.send(msg)
 
 #csv
-with open(name_csv, "r", newline="") as file:
+with open(name_csv, "r", newline="", encoding="utf-8") as file:
     reader_csv = csv.reader(file)
     dataCSV = []
     for i in reader_csv:
