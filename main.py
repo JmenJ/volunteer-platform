@@ -9,6 +9,8 @@ sp_svob_fail = ["/login.html", "/reg.html", "/main.html"]
 
 db_ip = [] #[[ip, time, [login, type]], ...]
 
+db_registrat = {} #{ip : [password, tip, [...]], ...}
+
 def update_time(ip):
     global db_ip
     while len(db_ip)>0 and db_ip[0][1] + time_prost*60*10e+9 < time.time_ns():
@@ -85,26 +87,30 @@ db_cursor.execute("CREATE INDEX IF NOT EXISTS ind_spectag ON Partner (specteg)")
 db_connection.commit()
 
 def addVolunteers(password, uniquenumber, inn):
-    cursor.execute('INSERT INTO Volunteers (password, uniquenumber, inn) VALUES (?, ?, ?)', (password, uniquenumber, inn))
-def addPartner(login, nameofcompanii, password, specteg):
-    cursor.execute('INSERT INTO Partner (login, nameofcompanii, password, specteg) VALUES (?, ?, ?, ?)', (login, nameofcompanii, password, "None"))
+    db_cursor.execute('INSERT INTO Volunteers (password, uniquenumber, inn) VALUES (?, ?, ?)', (password, uniquenumber, inn))
+    db_connection.commit()
+def addPartner(login, email, password):
+    db_cursor.execute('INSERT INTO Partner (login, email, nameofcompanii, password, specteg) VALUES (?, ?, ?, ?, ?)', (login, email, "NoName", password, "None"))
+    db_connection.commit()
 def editVolunteers(inn, nameparam, value):
-    cursor.execute('UPDATE Users SET ? = ? WHERE inn = ?', (nameparam, value, inn))
+    db_cursor.execute('UPDATE Users SET ? = ? WHERE inn = ?', (nameparam, value, inn))
+    db_connection.commit()
 def editPartner(name_id, value_id, nameparam, value):
-    cursor.execute('UPDATE Users SET ? = ? WHERE ? = ?', (nameparam, value, name_id, value_id))
+    db_cursor.execute('UPDATE Users SET ? = ? WHERE ? = ?', (nameparam, value, name_id, value_id))
+    db_connection.commit()
 
 def getByVolunteers(inn, param):
-    cursor.execute('SELECT ? FROM Volunteers WHERE inn = ?', (param, inn))
+    db_cursor.execute('SELECT ? FROM Volunteers WHERE inn = ?', (param, inn))
     return cursor.fetchall()
 def getByPartner(name_id, value_id, param):
-    cursor.execute('SELECT ? FROM Partner WHERE ? = ?', (param, name_id, value_id))
-    return cursor.fetchall()
+    db_cursor.execute('SELECT ? FROM Partner WHERE ? = ?', (param, name_id, value_id))
+    return db_cursor.fetchall()
 def getVolunteers(inn):
-    cursor.execute('SELECT * FROM Volunteers WHERE inn = ?', (inn))
-    return cursor.fetchall()
+    db_cursor.execute('SELECT * FROM Volunteers WHERE inn = ?', (inn))
+    return db_cursor.fetchall()
 def getPartner(param, name_id):
-    cursor.execute('SELECT * FROM Partner WHERE ? = ?', (name_id, value_id))
-    return cursor.fetchall()
+    db_cursor.execute('SELECT * FROM Partner WHERE ? = ?', (name_id, value_id))
+    return db_cursor.fetchall()
 
 
 def obrabotka(ip, dir):
@@ -183,17 +189,61 @@ def prov(dir):
         if tip == "Volunteers":
             inn = request.headers.get("MyINN")
             password = request.headers.get("MyPassword")
-            
+            if not (isinstance(inn, str) and isinstance(password, str)):
+                response.headers["MyState"] = "False"
+                return response
+            st = 0
+            for i in len(range(dataCSV)):
+                if inn == dataCSV[i][1]:
+                    st = 1
+                    break
+            if st == 0:
+                response.headers["MyState"] = "False"
+                return response
+            response = make_response("")
+            response.headers["Content-Type"] = "text/plain"
+            response.headers["MyState"] = "True"
+            db_registrat[ip] = [password, tip, [inn]]
+            return response
         elif tip == "Partner":
             login = request.headers.get("MyLogin")
             email = request.headers.get("MyEmail")
             password = request.headers.get("MyPassword")
-            
+            if not (isinstance(login, str) and isinstance(password, str) and isinstance(email, str)):
+                response.headers["MyState"] = "False"
+                return response
+            response = make_response("")
+            response.headers["Content-Type"] = "text/plain"
+            response.headers["MyState"] = "True"
+            db_registrat[ip] = [password, tip, [login, email]]
+            return response
         else:
+            response = make_response("")
+            response.headers["Content-Type"] = "text/plain"
             response.headers["MyState"] = "False"
             return response
     elif ("/"+dir == "/reg.html?code"):
-        pass
+        tip = request.headers.get("MyType")
+        ip = request.remote_addr
+        
+        response = make_response("")
+        response.headers["Content-Type"] = "text/plain"
+        
+        if ip in db_registrat:
+            if tip == db_registrat[ip][1]:
+                code = request.headers.get("MyCode")
+                if isinstance(code, str):
+                    response.headers["MyState"] = "True"
+                    #proverka koda
+                    if tip == "Volunteers":
+                        addVolunteers(db_registrat[ip][0], 0, db_registrat[ip][2][0])
+                        return response
+                    elif tip == "Partner":
+                        addPartner(db_registrat[ip][2][0], db_registrat[ip][2][1], db_registrat[ip][0])
+                        return response
+        response.headers["MyState"] = "False"
+        return response
+                    
     elif ("/"+dir in sp_svob_fail):
         return open("./test1/html/"+dir, "r").read()
     else:
@@ -212,15 +262,7 @@ def prov(dir):
         else:
             return open("./test1/html/main.html", "r").read()
 #----------------------
-# def prov(dir):
-#     fl_name = "./test1/html/"+dir
-#     fl_name.replace("%20", " ")
-#     print(fl_name)
-#     if os.path.isfile(fl_name) and ".." not in fl_name:
-#         data = open(fl_name, "r").read()
-#     else:
-#         data = dir + " Not found!"
-#     return data
+
 
 
 app.run(debug=True, host = "127.0.0.1", port = 30000)
