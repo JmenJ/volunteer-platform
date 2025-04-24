@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Регистрация партнёра</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tags {
+      margin-bottom: 20px;
+    }
+
+    .tags label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    button {
+      width: 100%;
+      background-color: #3A7BD5;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2e5faa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Добро пожаловать, партнёр!</h2>
+    <form id="companyForm">
+      <label for="companyName">Полное название компании</label>
+      <input type="text" id="companyName" required>
+
+      <label for="description">Описание компании</label>
+      <textarea id="description" rows="3" required></textarea>
+
+      <label for="top50">Бонусы для ТОП 50</label>
+      <input type="text" id="top50" required>
+
+      <label for="top100">Бонусы для ТОП 100</label>
+      <input type="text" id="top100" required>
+
+      <label for="top150">Бонусы для ТОП 150</label>
+      <input type="text" id="top150" required>
+
+      <div class="tags">
+        <strong>Выберите теги:</strong>
+        <label><input type="checkbox" value="Благотворительность"> Благотворительность</label>
+        <label><input type="checkbox" value="Экологические инициативы"> Экологические инициативы</label>
+        <label><input type="checkbox" value="Помощь пожилым"> Помощь пожилым</label>
+        <label><input type="checkbox" value="Работа с детьми"> Работа с детьми</label>
+        <label><input type="checkbox" value="Организация мероприятий"> Организация мероприятий</label>
+        <label><input type="checkbox" value="Финансовая поддержка (сбор средств)"> Финансовая поддержка (сбор средств)</label>
+        <label><input type="checkbox" value="Волонтерство общего профиля"> Волонтерство общего профиля</label>
+      </div>
+
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('companyForm');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('companyName').value;
+      const description = document.getElementById('description').value;
+      const top_50 = document.getElementById('top50').value;
+      const top_100 = document.getElementById('top100').value;
+      const top_150 = document.getElementById('top150').value;
+
+      const selectedTags = [];
+      document.querySelectorAll('.tags input[type="checkbox"]:checked').forEach(tag => {
+        selectedTags.push(tag.value);
+      });
+
+      const companies = [{
+        name,
+        description,
+        top_50,
+        top_100,
+        top_150,
+        tags: selectedTags
+      }];
+
+      console.log("Данные отправлены в БД:", companies);
+
+      alert("Информация успешно отправлена!");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
