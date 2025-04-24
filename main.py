@@ -5,7 +5,7 @@ import csv
 
 time_prost = 30 #minute
 
-sp_svob_fail = ["/login.html", "/reg.html", "/main.html"]
+sp_svob_fail = ["/login.html", "/reg.html"]
 
 db_ip = [] #[[ip, time, [login, type]], ...]
 
@@ -127,7 +127,7 @@ def obrabotka(ip, dir):
 
 @app.route("/")
 def main1():
-    fl_name = "./test1/html/main.html"
+    fl_name = "./test1/html/login.html"
     data = open(fl_name, "r").read()
     return data
 
@@ -258,9 +258,9 @@ def prov(dir):
             if st:
                 return data;
             else:
-                return open("./test1/html/main.html", "r").read()
+                return open("./test1/html/login.html", "r").read()
         else:
-            return open("./test1/html/main.html", "r").read()
+            return open("./test1/html/login.html", "r").read()
 #----------------------
 
 
