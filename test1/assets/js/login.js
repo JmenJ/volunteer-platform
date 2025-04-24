@@ -17,6 +17,10 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
 
   alert(`Вход как ${role === 'volunteer' ? 'Волонтёр' : 'Партнёр'} выполнен`);
 
-  // Перенаправление
-  window.location.href = "main.html";
+  // Перенаправление в зависимости от роли
+  if (role === 'volunteer') {
+    window.location.replace("vol/main_vol.html");
+  } else {
+    window.location.replace("par/main_par.html");
+  }
 });

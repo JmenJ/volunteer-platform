@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бонусы от компаний</title>
+  <link rel="stylesheet" href="/assets/css/style_profile.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">Центр волонтерства</div>
+    <a href="main_vol.html" class="back-button">На главную</a>
+  </header>
+
+  <main class="company-profile">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="profile_vol.html">О волонтере</a></li>
+        <li class="active">Доступные бонусы</li>
+        <li><a href="profile_vol_history.html">История бонусов</a></li>
+        <li><a href="profile_vol.offers.html">Предложения</a></li>  
+      </ul>
+      <div class="filter-box">
+        <h4>Фильтр по тегам</h4>
+        <div class="filter-tags">
+          <div class="filter-tag"><input type="checkbox" id="tag-charity" value="Благотворительность"><label for="tag-charity">Благотворительность</label></div>
+          <div class="filter-tag"><input type="checkbox" id="tag-eco" value="Экологические инициативы"><label for="tag-eco">Экологические инициативы</label></div>
+          <div class="filter-tag"><input type="checkbox" id="tag-elderly" value="Помощь пожилым"><label for="tag-elderly">Помощь пожилым</label></div>
+          <div class="filter-tag"><input type="checkbox" id="tag-kids" value="Работа с детьми"><label for="tag-kids">Работа с детьми</label></div>
+          <div class="filter-tag"><input type="checkbox" id="tag-events" value="Организация мероприятий"><label for="tag-events">Организация мероприятий</label></div>
+          <div class="filter-tag"><input type="checkbox" id="tag-funding" value="Финансовая поддержка"><label for="tag-funding">Финансовая поддержка</label></div>
+          <div class="filter-tag"><input type="checkbox" id="tag-general" value="Волонтерство общего профиля"><label for="tag-general">Волонтерство общего профиля</label></div>
+        </div>
+      </div>
+      
+    </aside>
+
+    <section class="content">
+        <div class="companies-table" id="companyList">
+          <!-- Компании будут подгружены из JS -->
+        </div>
+      </section>          
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <a href="#" class="footer-link">Личный кабинет</a>
+        <a href="#" class="footer-link">Регистрация</a>
+        <a href="#" class="footer-link">Помощь</a>
+      </div>
+      <div class="footer-column">
+        <a href="#" class="footer-link">Как найти услугу</a>
+        <a href="#" class="footer-link">Карта центров волонтерства</a>
+        <a href="#" class="footer-link">Партнёрам</a>
+      </div>
+      <div class="footer-column">
+        <span class="location">г Москва</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const companies = [
+      {
+        name: "EcoLife",
+        description: "Скидка на товары для устойчивого образа жизни.",
+        top: "Топ-50",
+        tags: ["Экологические инициативы", "Благотворительность"]
+      },
+      {
+        name: "Детский Мир",
+        description: "Подарочные сертификаты для волонтёров, работающих с детьми.",
+        top: "Топ-100",
+        tags: ["Работа с детьми"]
+      },
+      {
+        name: "Серебряный возраст",
+        description: "Скидки в аптеке и бесплатные билеты на концерты.",
+        top: "Топ-150",
+        tags: ["Помощь пожилым"]
+      },
+      {
+        name: "Green Events",
+        description: "VIP-приглашения на экологические конференции.",
+        top: "Топ-50",
+        tags: ["Организация мероприятий", "Экологические инициативы"]
+      },
+      {
+        name: "CharityFood",
+        description: "Бесплатные обеды для активных волонтёров.",
+        top: "Топ-100",
+        tags: ["Благотворительность", "Волонтерство общего профиля"]
+      },
+      {
+        name: "Bank4U",
+        description: "Низкие ставки по кредиту на обучение.",
+        top: "Топ-50",
+        tags: ["Финансовая поддержка"]
+      }
+    ];
+  
+    function renderCompanies(filteredTags = []) {
+      const container = document.getElementById("companyList");
+      container.innerHTML = "";
+  
+      const filtered = filteredTags.length
+        ? companies.filter(c => c.tags.some(tag => filteredTags.includes(tag)))
+        : companies;
+  
+      filtered.forEach(company => {
+        const tagsHTML = company.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
+        container.innerHTML += `
+          <div class="company-row">
+            <div class="col-name">${company.name}<br><small style="color: #16a085;">${company.top}</small></div>
+            <div class="col-description">${company.description}</div>
+            <div class="col-tags">${tagsHTML}</div>
+          </div>
+        `;
+      });
+    }
+  
+    const checkboxes = document.querySelectorAll(".filter-tag input");
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener("change", () => {
+        const selectedTags = Array.from(checkboxes)
+          .filter(cb => cb.checked)
+          .map(cb => cb.value);
+        renderCompanies(selectedTags);
+      });
+    });
+  
+    renderCompanies(); // Изначальная отрисовка
+  </script>
+  
+</body>
+</html>
